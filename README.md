@@ -7,7 +7,7 @@ to the outside world.
 
 Example to run the docker instance:
 
-    sudo docker run -e GRAPHITE_HOST=graphite.example.com -p 8125:8125 -d antonlindstrom/statsd
+    sudo docker run -e GRAPHITE_HOST=graphite.example.com -p 8125:8125/udp -p 8126:8126 -d hybris/statsd
 
 Environment variables that can be used to set options:
 
@@ -15,9 +15,9 @@ Environment variables that can be used to set options:
     GRAPHITE_HOST (default: localhost)
     STATSD_PORT   (default: 8125)
 
-This image is available in the docker registry at antonlindstrom/statsd:
+This image is available in the docker registry at hybris/statsd:
 
-    sudo docker pull antonlindstrom/statsd
+    sudo docker pull hybris/statsd
 
 The [statsd admin interface](https://github.com/etsy/statsd/blob/master/docs/admin_interface.md)
 can be accessed through `8126/tcp`.
