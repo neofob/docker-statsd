@@ -1,13 +1,13 @@
 FROM        ubuntu:14.04
-MAINTAINER  John Klingler <jfklingler@gmail.com>
+MAINTAINER  Kim Neunert <kim.neunert@hybris.de>
 
 RUN     echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list  &&\
         apt-get -y update  &&\
-        apt-get -y install wget git python  &&\
-        wget -O /tmp/node-v0.11.9.tar.gz http://nodejs.org/dist/v0.11.9/node-v0.11.9-linux-x64.tar.gz  &&\
-        tar -C /usr/local/ --strip-components=1 -zxvf /tmp/node-v0.11.9.tar.gz  &&\
-        rm /tmp/node-v0.11.9.tar.gz  &&\
-        git clone git://github.com/etsy/statsd.git statsd  &&\
+        apt-get -y install wget git &&\
+        wget -q -O /tmp/node.tar.gz https://nodejs.org/dist/v4.2.2/node-v4.2.2-linux-x64.tar.gz  &&\
+        tar -C /usr/local/ --strip-components=1 -zxf /tmp/node.tar.gz  &&\
+        rm /tmp/node.tar.gz  &&\
+        git clone -b v0.7.2 --depth 1 git://github.com/etsy/statsd.git statsd  &&\
         apt-get clean  &&\
         rm -rf /tmp /var/cache/apt
 
