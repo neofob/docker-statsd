@@ -1,14 +1,18 @@
-FROM        ubuntu:14.04
-MAINTAINER  Kim Neunert <kim.neunert@hybris.de>
+FROM        debian:jessie
+MAINTAINER  Tuan T. Pham <tuan@vt.edu>
 
-RUN     echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list  &&\
-        apt-get -y update  &&\
-        apt-get -y install wget git &&\
-        wget -q -O /tmp/node.tar.gz https://nodejs.org/dist/v4.2.2/node-v4.2.2-linux-x64.tar.gz  &&\
-        tar -C /usr/local/ --strip-components=1 -zxf /tmp/node.tar.gz  &&\
-        rm /tmp/node.tar.gz  &&\
-        git clone -b v0.7.2 --depth 1 git://github.com/etsy/statsd.git statsd  &&\
-        apt-get clean  &&\
+ENV	PKGS "wget git xz-utils"
+ENV	NODE_JS_URL https://nodejs.org/dist/v4.6.0/node-v4.6.0-linux-x64.tar.xz
+ENV	STATSD_GIT git://github.com/etsy/statsd.git
+ENV	STATSD_TAG v0.8.0
+
+RUN	apt-get -yq update  && \
+        apt-get -yq install ${PKGS} && \
+        wget -q -O /tmp/node.tar.xz ${NODE_JS_URL}  && \
+        tar -C /usr/local/ --strip-components=1 -Jxf /tmp/node.tar.xz  && \
+        rm /tmp/node.tar.xz  && \
+        git clone -b ${STATSD_TAG} --depth 1 ${STATSD_GIT} statsd  && \
+        apt-get clean  && \
         rm -rf /tmp /var/cache/apt
 
 ADD     ./config.js ./statsd/config.js
