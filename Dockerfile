@@ -11,11 +11,11 @@ RUN	apt-get -yq update  && \
         wget -q -O /tmp/node.tar.xz ${NODE_JS_URL}  && \
         tar -C /usr/local/ --strip-components=1 -Jxf /tmp/node.tar.xz  && \
         rm /tmp/node.tar.xz  && \
-        git clone -b ${STATSD_TAG} --depth 1 ${STATSD_GIT} statsd  && \
+        git clone -b ${STATSD_TAG} --depth 1 ${STATSD_GIT} /statsd  && \
         apt-get clean  && \
-        rm -rf /tmp /var/cache/apt
+        rm -rf /tmp /var/cache/apt /var/lib/apt/lists/*
 
-ADD     ./config.js ./statsd/config.js
+ADD     ./config.js /statsd/config.js
 
 EXPOSE  8125/udp
 EXPOSE  8126/tcp
