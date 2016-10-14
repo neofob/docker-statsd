@@ -6,6 +6,7 @@ GRAPHITE_HOST ?=localhost
 UDP_PORT ?=8125
 TCP_PORT ?=8126
 TAG ?=latest
+NAME ?=statsd
 
 all: docker
 
@@ -27,16 +28,25 @@ help:
 	@echo	"\tRun docker $(DOCKER_NAME):$(TAG)"
 	@echo	"\t\tDefault UDP_PORT=$(UDP_PORT) TCP_PORT=$(TCP_PORT) GRAPHITE_PORT=$(GRAPHITE_PORT)"
 	@echo
+	@echo   "\033[1;31mshutdown:\033[0m"
+	@echo	"\tShutdown the running docker $(NAME)"
+	@echo	"\tTo specify docker name: NAME=ContainerName make shutdown"
+	@echo
 	@echo	"\033[1;31mclean:\033[0m"
 	@echo	"\tRemoving the docker image $(DOCKER_NAME):$(TAG)"
 	@echo
 	@echo	"__author__: tuan t. pham"
 
 run:
-	docker -e GRAPHITE_HOST=$(GRAPHITE_HOST) \
+	docker run -e GRAPHITE_HOST=$(GRAPHITE_HOST) \
 		-p 8125:$(UDP_PORT)/udp		\
 		-p 8126:$(TCP_PORT)		\
+		--name $(NAME)			\
 		-d $(DOCKER_NAME):$(TAG)
+
+shutdown:
+	docker stop $(NAME)
+	docker rm $(NAME)
 
 clean:
 	@echo "Removing the old docker image $(DOCKER_NAME):$(TAG)"
