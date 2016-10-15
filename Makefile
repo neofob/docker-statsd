@@ -26,7 +26,7 @@ help:
 	@echo
 	@echo	"\033[1;31mrun:\033[0m"
 	@echo	"\tRun docker $(DOCKER_NAME):$(TAG)"
-	@echo	"\t\tDefault UDP_PORT=$(UDP_PORT) TCP_PORT=$(TCP_PORT) GRAPHITE_PORT=$(GRAPHITE_PORT)"
+	@echo	"\t\tDefault UDP_PORT=$(UDP_PORT) TCP_PORT=$(TCP_PORT) GRAPHITE_HOST=$(GRAPHITE_HOST)"
 	@echo
 	@echo   "\033[1;31mshutdown:\033[0m"
 	@echo	"\tShutdown the running docker $(NAME)"
