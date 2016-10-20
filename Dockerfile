@@ -1,4 +1,4 @@
-FROM        debian:jessie
+FROM        phusion/baseimage:0.9.19
 MAINTAINER  Tuan T. Pham <tuan@vt.edu>
 
 ENV	PKGS "wget git xz-utils"
