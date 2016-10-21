@@ -2,7 +2,7 @@ FROM        phusion/baseimage:0.9.19
 MAINTAINER  Tuan T. Pham <tuan@vt.edu>
 
 ENV	PKGS "wget git xz-utils"
-ENV	NODE_JS_URL https://nodejs.org/dist/v4.6.0/node-v4.6.0-linux-x64.tar.xz
+ENV	NODE_JS_URL https://nodejs.org/dist/v4.6.1/node-v4.6.1-linux-x64.tar.xz
 ENV	STATSD_GIT git://github.com/etsy/statsd.git
 ENV	STATSD_TAG v0.8.0
 

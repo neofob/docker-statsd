@@ -10,15 +10,18 @@ NAME ?=statsd
 
 all: docker
 
-docker: Dockerfile
-	docker build -t $(DOCKER_NAME):$(TAG) .
-
 help:
 	@echo	"A little help from your Makefile friend"
 	@echo	"\033[1;31mAvailable targets:\033[0m"
 	@echo
 	@echo	"\033[1;31mhelp:\033[0m"
 	@echo	"\tThis help message"
+	@echo
+	@echo	"\033[1;31mdump:\033[0m"
+	@echo	"\tDump environment variables that this Makefile will use"
+	@echo
+	@echo	"\033[1;31mpull:\033[0m"
+	@echo	"\tPull the docker image $(DOCKER_NAME):$(TAG)"
 	@echo
 	@echo	"\033[1;31mdocker:\033[0m"
 	@echo	"\tBuild the docker from Dockerfile and tag it as $(DOCKER_NAME):$(TAG)"
@@ -36,6 +39,20 @@ help:
 	@echo	"\tRemoving the docker image $(DOCKER_NAME):$(TAG)"
 	@echo
 	@echo	"__author__: tuan t. pham"
+
+dump:
+	@echo "DOCKER_NAME=$(DOCKER_NAME)"
+	@echo "GRAPHITE_HOST=$(GRAPHITE_HOST)"
+	@echo "UDP_PORT=$(UDP_PORT)"
+	@echo "TCP_PORT=$(TCP_PORT)"
+	@echo "TAG=$(TAG)"
+	@echo "NAME=$(NAME)"
+
+pull:
+	docker pull $(DOCKER_NAME):$(TAG)
+
+docker: Dockerfile
+	docker build -t $(DOCKER_NAME):$(TAG) .
 
 run:
 	docker run -e GRAPHITE_HOST=$(GRAPHITE_HOST) \
